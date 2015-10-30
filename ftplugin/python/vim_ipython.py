@@ -142,7 +142,10 @@ def km_from_string(s=''):
                 p = p.lstrip().rstrip() # profile part of the string
                 fullpath = find_connection_file(k,p)
             else:
-                fullpath = find_connection_file(s.lstrip().rstrip())
+                if not s or s.isspace():
+                    fullpath = find_connection_file()
+                else:
+                    fullpath = find_connection_file(s.lstrip().rstrip())
         except IOError as e:
             echo(":IPython " + s + " failed", "Info")
             echo("^-- failed '" + s + "' not found", "Error")
